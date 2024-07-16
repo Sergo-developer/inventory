@@ -3,7 +3,9 @@ import Inventory from './components/Inventory.vue';
 </script>
 
 <template>
- <inventory />
+ <Inventory>
+
+ </Inventory>
 </template>
 
 <style scoped>
