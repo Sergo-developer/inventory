@@ -1,11 +1,39 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 import { item } from '../stores/itemDatabase.js';
 import Modal from './Modal.vue';
 
 const slotsCount = new Array(25).fill(null);
 const inventorySlots = ref(slotsCount);
 const selectedItem = ref(null);
+const selectedItemId = ref(null);
+
+
+if (localStorage.getItem('inventory')) {
+  inventorySlots.value = JSON.parse(localStorage.getItem('inventory'));
+} else {
+  inventorySlots.value[0] = item[0];
+  inventorySlots.value[1] = item[1];
+  inventorySlots.value[2] = item[2];
+}
+
+watch(inventorySlots.value, () => {
+  console.log('it`s works');
+  localStorage.setItem('inventory', JSON.stringify(inventorySlots.value));
+});
+
+const deleteItems = (data) => {
+  if (typeof (data.value) !== 'number' && selectedItem.value === null) {
+    return;
+  }
+
+  const toDelete = Math.abs(data.value);
+  if ((selectedItem.value.count - toDelete) <= 0) {
+    inventorySlots.value[selectedItemId.value] = null;
+  } else {
+    inventorySlots.value[selectedItemId.value].count -= toDelete;
+  }
+};
 
 const clearSelected = () => {
   selectedItem.value = null;
@@ -23,9 +51,6 @@ const onDrop = (event, index) => {
   inventorySlots.value[index] = itemToMove;
 };
 
-inventorySlots.value[0] = item[0];
-inventorySlots.value[1] = item[1];
-
 
 const onDragOver = (event) => {
   event.preventDefault();
@@ -41,7 +66,7 @@ const onDragOver = (event) => {
           :key="i"
           :id="i"
           class="inventory-slot"
-          @click="selectedItem = slot"
+          @click="selectedItem = slot; selectedItemId = i"
           @dragover="onDragOver"
           @drop="(event) => onDrop(event, i)"
       >
@@ -58,15 +83,16 @@ const onDragOver = (event) => {
         </div>
       </div>
     </div>
-    <Modal v-if="selectedItem" :data="selectedItem" @childEvent="clearSelected"/>
+    <Modal v-if="selectedItem" :data="selectedItem" @closeWindow="clearSelected"
+           @deleteItems="deleteItems"/>
   </div>
 </template>
 
 <style scoped>
 .count {
-  border-top: #4D4D4D solid 3px;
-  border-left: #4D4D4D solid 3px;
-  border-top-left-radius: 14px;
+  border-top: #4D4D4D solid 1px;
+  border-left: #4D4D4D solid 1px;
+  border-top-left-radius: 6px;
   min-width: 20px;
   color: white;
 }
