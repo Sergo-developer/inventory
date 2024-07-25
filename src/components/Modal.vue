@@ -5,7 +5,7 @@ const isDelete = ref(false);
 const itemCountToDelete = ref(1);
 
 const {} = defineProps({
-  data: {}
+  data: {},
 });
 const emit = defineEmits(['closeWindow', 'deleteItems']);
 const closeWindow = () => {
@@ -32,8 +32,12 @@ const deleteItems = () => {
         <div class="delete-window-button" @click="isDelete = true">Удалить</div>
       </div>
       <div class="delete-window" v-if="isDelete">
-        <input class="item-to-delete-count-input" v-model="itemCountToDelete" :max="data.count"
-               type="number">
+        <input
+          class="item-to-delete-count-input"
+          v-model="itemCountToDelete"
+          :max="data.count"
+          type="number"
+        />
         <div class="delete-buttons-wrapper">
           <div class="delete-button cancel" @click="isDelete = false">Отменить</div>
           <div class="delete-button confirm" @click="deleteItems">Подтвердить</div>
@@ -51,19 +55,18 @@ const deleteItems = () => {
   height: 33px;
   border-radius: 8px;
   cursor: pointer;
-  box-shadow: #FA7272 0 0 20px;
+  box-shadow: #fa7272 0 0 20px;
 }
 
 .delete-button.confirm {
-  background: #FA7272;
+  background: #fa7272;
   width: 112px;
 }
 
 .delete-button.cancel {
   background-color: white;
   width: 88px;
-  color: #2D2D2D;
-
+  color: #2d2d2d;
 }
 
 .delete-buttons-wrapper {
@@ -80,12 +83,12 @@ const deleteItems = () => {
   left: 21px;
   color: white;
   text-align: center;
-  border: solid 1px #4D4D4D;
+  border: solid 1px #4d4d4d;
   background-color: #262626;
 }
 
 .delete-window {
-  border-top: solid 1px #4D4D4D;
+  border-top: solid 1px #4d4d4d;
   position: absolute;
   height: 133px;
   width: 250px;
@@ -96,7 +99,7 @@ const deleteItems = () => {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #FA7272;
+  background-color: #fa7272;
   width: 220px;
   height: 39px;
   border-radius: 8px;
@@ -110,7 +113,7 @@ const deleteItems = () => {
   align-items: center;
   position: absolute;
   bottom: 0;
-  border-top: #4D4D4D 1px solid;
+  border-top: #4d4d4d 1px solid;
   width: 225px;
   height: 100px;
 }
@@ -126,7 +129,7 @@ const deleteItems = () => {
 
 .close-cross {
   position: absolute;
-  background-image: url("/public/UI/cross.png");
+  background-image: url('/UI/cross.png');
   background-size: 24px;
   height: 24px;
   width: 24px;
@@ -138,7 +141,7 @@ const deleteItems = () => {
   display: flex;
   width: 220px;
   font-size: 25px;
-  justify-content: flex-end
+  justify-content: flex-end;
 }
 
 .item-image {
@@ -152,7 +155,7 @@ const deleteItems = () => {
   display: flex;
   align-items: center;
   justify-content: center;
-  border-bottom: #4D4D4D solid 1px;
+  border-bottom: #4d4d4d solid 1px;
   height: 200px;
   width: 220px;
 }
@@ -162,7 +165,7 @@ const deleteItems = () => {
   align-items: center;
   flex-direction: column;
   backdrop-filter: blur(10px);
-  border-left: #4D4D4D solid 3px;
+  border-left: #4d4d4d solid 3px;
   height: 510px;
   width: 250px;
 }
