@@ -95,8 +95,10 @@ const onDragOver = (event) => {
   border-top: #4d4d4d solid 1px;
   border-left: #4d4d4d solid 1px;
   border-top-left-radius: 6px;
-  min-width: 20px;
-  color: white;
+  width: 16px;
+  height: 16px;
+  font-size: 11px;
+  color: #7d7d7d;
 }
 
 .count-wrapper {
@@ -111,9 +113,9 @@ const onDragOver = (event) => {
   position: absolute;
   display: flex;
   background-repeat: no-repeat;
-  background-size: 90px;
-  height: 99px;
-  width: 105px;
+  background-size: 54px;
+  height: 54px;
+  width: 54px;
   cursor: pointer;
 }
 
@@ -125,6 +127,10 @@ const onDragOver = (event) => {
   border-right: #4d4d4d solid 1px;
   height: 100px;
   width: 105px;
+}
+
+.inventory-slot:hover {
+  background-color: #2f2f2f;
 }
 
 .inventory-slot:nth-child(n + 21) {

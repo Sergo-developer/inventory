@@ -5,14 +5,16 @@ import '@brayamvalero/vue3-skeleton/dist/style.css';
 
 <template>
   <div class="panel-wrapper">
-    <Skeleton
-      width="710px"
-      height="41px"
-      background-color="#3c3c3c"
-      border-radius="16px"
-      inline
-    ></Skeleton>
-    <div class="close-button">
+    <div style="margin-left: 18px">
+      <Skeleton
+        width="699px"
+        height="36px"
+        background-color="#3c3c3c"
+        border-radius="12px"
+        inline
+      />
+    </div>
+    <div class="close-cross-wrapper">
       <div class="close-cross"></div>
     </div>
   </div>
@@ -21,7 +23,7 @@ import '@brayamvalero/vue3-skeleton/dist/style.css';
 <style scoped>
 .panel-wrapper {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   height: 72px;
   border-radius: 12px;
@@ -30,19 +32,19 @@ import '@brayamvalero/vue3-skeleton/dist/style.css';
 }
 
 .close-cross {
-  background-image: url('/public/UI/cross.png');
+  background-image: url('/UI/cross.png');
   background-size: 24px;
   height: 24px;
   width: 24px;
   cursor: pointer;
-  top: 10px;
+  margin-top: 8px;
+  margin-right: 8px;
 }
 
-.close-button {
-  position: absolute;
+.close-cross-wrapper {
   display: flex;
   height: 72px;
-  width: 41%;
+  width: 100%;
   justify-content: flex-end;
 }
 </style>

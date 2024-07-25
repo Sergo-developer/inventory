@@ -1,20 +1,20 @@
 export const item = [
   {
     name: 'Предмет',
-    description: 'Бутылка с синей жидкостью, антифриз наверное ',
-    count: 1,
-    image: '/Items/hugeManaPotionBottle.png',
+    description: '',
+    count: 4,
+    image: 'Items/item1.svg',
   },
   {
-    name: 'Бутылка',
-    description: 'Бутылка с красной жидкостью, на антифриз не похоже',
-    count: 1,
-    image: '/Items/potionBottle.png',
+    name: 'Предмет 2',
+    description: '',
+    count: 2,
+    image: 'Items/item2.svg',
   },
   {
-    name: 'Еще 1 бутылка',
-    description: 'Бутылка не с красной жидкостью, на антифриз тоже не похоже',
-    count: 1,
-    image: '/Items/restorePotion.png',
+    name: 'Предмет 3',
+    description: '',
+    count: 5,
+    image: 'Items/item3.svg',
   },
 ];

@@ -1,6 +1,9 @@
 <script setup>
 import { ref } from 'vue';
+import '@brayamvalero/vue3-skeleton/dist/style.css';
+import { Skeleton } from '@brayamvalero/vue3-skeleton';
 
+const skeletonWidth = [211, 211, 211, 180, 80];
 const isDelete = ref(false);
 const itemCountToDelete = ref(1);
 
@@ -26,10 +29,29 @@ const deleteItems = () => {
       <div class="item-image-wrapper">
         <div class="item-image" :style="{ backgroundImage: `url(${data.image})` }"></div>
       </div>
-      <div class="item-name">{{ data.name }}</div>
-      <div class="item-description">{{ data.description }}</div>
+      <div class="skeleton-wrapper">
+        <div>
+          <Skeleton
+            width="211px"
+            height="30px"
+            background-color="#3c3c3c"
+            border-radius="8px"
+            inline
+          />
+        </div>
+        <div>
+          <Skeleton
+            v-for="(el, i) in skeletonWidth"
+            :key="i"
+            :width="el"
+            height="10px"
+            background-color="#3c3c3c"
+            border-radius="4px"
+          />
+        </div>
+      </div>
       <div class="delete-window-button-wrapper" v-if="!isDelete">
-        <div class="delete-window-button" @click="isDelete = true">Удалить</div>
+        <div class="delete-window-button" @click="isDelete = true">Удалить предмет</div>
       </div>
       <div class="delete-window" v-if="isDelete">
         <input
@@ -48,6 +70,13 @@ const deleteItems = () => {
 </template>
 
 <style scoped>
+.skeleton-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  height: 200px;
+}
+
 .delete-button {
   display: flex;
   justify-content: center;
@@ -90,6 +119,7 @@ const deleteItems = () => {
 .delete-window {
   border-top: solid 1px #4d4d4d;
   position: absolute;
+  backdrop-filter: blur(10px);
   height: 133px;
   width: 250px;
   bottom: 0;
@@ -134,12 +164,13 @@ const deleteItems = () => {
   height: 24px;
   width: 24px;
   cursor: pointer;
-  top: 10px;
+  top: 8px;
+  margin-right: 8px;
 }
 
 .close-button {
   display: flex;
-  width: 220px;
+  width: 100%;
   font-size: 25px;
   justify-content: flex-end;
 }
@@ -165,7 +196,7 @@ const deleteItems = () => {
   align-items: center;
   flex-direction: column;
   backdrop-filter: blur(10px);
-  border-left: #4d4d4d solid 3px;
+  border-left: #4d4d4d solid 1px;
   height: 510px;
   width: 250px;
 }

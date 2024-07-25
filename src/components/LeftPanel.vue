@@ -8,16 +8,27 @@ const skeletonWidth = [155, 190, 170, 160, 140, 80];
 <template>
   <div class="panel-wrapper">
     <div class="panel-image"></div>
-    <h3 class="text-box">
-      <Skeleton width="190px" height="26px" background-color="#3c3c3c" border-radius="8px" inline />
-      <Skeleton
-        v-for="(el, i) in skeletonWidth"
-        :width="el"
-        height="10px"
-        background-color="#3c3c3c"
-        border-radius="4px"
-      />
-    </h3>
+    <div class="text-box">
+      <div style="margin-top: 18px">
+        <Skeleton
+          width="190px"
+          height="26px"
+          background-color="#3c3c3c"
+          border-radius="8px"
+          inline
+        />
+      </div>
+      <div style="margin-top: 18px">
+        <Skeleton
+          v-for="(el, i) in skeletonWidth"
+          :key="i"
+          :width="el"
+          height="10px"
+          background-color="#3c3c3c"
+          border-radius="4px"
+        />
+      </div>
+    </div>
   </div>
 </template>
 
@@ -35,7 +46,7 @@ const skeletonWidth = [155, 190, 170, 160, 140, 80];
 }
 
 .panel-image {
-  margin-top: 10px;
+  margin-top: 18px;
   width: 208px;
   height: 240px;
   border-radius: 8px;
