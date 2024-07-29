@@ -33,6 +33,7 @@ const skeletonWidth = [155, 190, 170, 160, 140, 80];
 </template>
 
 <style scoped>
+
 .panel-wrapper {
   display: flex;
   flex-flow: column;

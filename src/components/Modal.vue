@@ -5,7 +5,7 @@ import { Skeleton } from '@brayamvalero/vue3-skeleton';
 
 const skeletonWidth = [211, 211, 211, 180, 80];
 const isDelete = ref(false);
-const itemCountToDelete = ref(1);
+const itemCountToDelete = ref();
 
 const {} = defineProps({
   data: {},
@@ -55,6 +55,7 @@ const deleteItems = () => {
       </div>
       <div class="delete-window" v-if="isDelete">
         <input
+          placeholder="Введите количество"
           class="item-to-delete-count-input"
           v-model="itemCountToDelete"
           :max="data.count"
@@ -137,6 +138,10 @@ const deleteItems = () => {
   bottom: 20px;
 }
 
+.delete-window-button:hover {
+  background: #ff8888;
+}
+
 .delete-window-button-wrapper {
   display: flex;
   justify-content: center;
@@ -202,7 +207,7 @@ const deleteItems = () => {
 }
 
 .plate-wrapper {
-  animation: slide 0.2s;
+  //animation: slide 0.2s;
   position: absolute;
   color: white;
   display: flex;
@@ -211,7 +216,7 @@ const deleteItems = () => {
   top: 0;
   right: 0;
   bottom: 0;
-  transition: all 0.2s;
+  //transition: all 0.2s;
 }
 
 @keyframes slide {

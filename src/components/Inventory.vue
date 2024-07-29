@@ -1,5 +1,5 @@
 <script setup>
-import { ref, watch } from 'vue';
+import { ref, watch, onMounted } from 'vue';
 import { item } from '../stores/itemDatabase.js';
 import Modal from './Modal.vue';
 
@@ -7,6 +7,7 @@ const slotsCount = new Array(25).fill(null);
 const inventorySlots = ref(slotsCount);
 const selectedItem = ref(null);
 const selectedItemId = ref(null);
+const dragImage = ref(null);
 
 if (localStorage.getItem('inventory')) {
   inventorySlots.value = JSON.parse(localStorage.getItem('inventory'));
@@ -40,6 +41,8 @@ const clearSelected = () => {
 const onDragStart = (event, index) => {
   event.dataTransfer.effectAllowed = 'move';
   event.dataTransfer.setData('text/plain', index);
+  dragImage.value.style.backgroundImage = `url('${inventorySlots.value[index].image}')`;
+  event.dataTransfer.setDragImage(dragImage.value, 60, 60);
 };
 
 const onDrop = (event, index) => {
@@ -50,8 +53,26 @@ const onDrop = (event, index) => {
 };
 
 const onDragOver = (event) => {
+  dragImage.value.style.backgroundImage = `url('')`;
   event.preventDefault();
 };
+
+onMounted(() => {
+  const ghostElement = document.createElement('div');
+  ghostElement.style.position = 'absolute';
+  ghostElement.style.top = '-9999px';
+  ghostElement.style.left = '-9999px';
+  ghostElement.style.width = '105px';
+  ghostElement.style.height = '100px';
+  ghostElement.style.backgroundSize = '54px';
+  ghostElement.style.backgroundPosition = 'center';
+  ghostElement.style.backgroundRepeat = 'no-repeat';
+  ghostElement.style.backgroundColor = 'rgba(38,38,38,1)';
+  ghostElement.style.border = '1px solid grey';
+  ghostElement.style.borderRadius = '24px';
+  document.body.appendChild(ghostElement);
+  dragImage.value = ghostElement;
+});
 </script>
 
 <template>
@@ -81,16 +102,31 @@ const onDragOver = (event) => {
         </div>
       </div>
     </div>
+    <Transition>
     <Modal
       v-if="selectedItem"
       :data="selectedItem"
       @closeWindow="clearSelected"
       @deleteItems="deleteItems"
     />
+    </Transition>
   </div>
 </template>
 
 <style scoped>
+
+.v-enter-active,
+.v-leave-active {
+  transition: 0.2s;
+}
+
+.v-enter-from{
+  right: -250px;
+}
+.v-leave-to{
+  right: -250px;
+}
+
 .count {
   border-top: #4d4d4d solid 1px;
   border-left: #4d4d4d solid 1px;
